@@ -1,0 +1,171 @@
+unit Unit1;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,math;
+
+type
+  TForm1 = class(TForm)
+    Main_PNL: TPanel;
+    Button_PNL: TPanel;
+    Sum_BTN: TButton;
+    Panelup_PNL: TPanel;
+    Panel_PNL: TPanel;
+    First_EDT: TEdit;
+    Second_EDT: TEdit;
+    Minus_BTN: TButton;
+    Divide_BTN: TButton;
+    Multiply_BTN: TButton;
+    StaticText1: TLabel;
+    StaticText2: TLabel;
+    StaticText3: TLabel;
+    Result_EDT: TEdit;
+    clear_BTN: TButton;
+    DarkMode_BTN: TButton;
+    procedure Sum_BTNClick(Sender: TObject);
+    procedure Minus_BTNClick(Sender: TObject);
+    procedure Divide_BTNClick(Sender: TObject);
+    procedure Multiply_BTNClick(Sender: TObject);
+    procedure clear_BTNClick(Sender: TObject);
+    procedure DarkMode_BTNClick(Sender: TObject);
+    procedure Result_EDTChange(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.clear_BTNClick(Sender: TObject);
+begin
+    First_EDT.Clear;    //== First_EDT.Text := '';
+    Second_EDT.clear;
+    Result_EDT.Clear;
+end;
+
+procedure TForm1.DarkMode_BTNClick(Sender: TObject);
+begin
+  if Panel_PNL.Color = $00361D1D then
+  begin    //light
+     Panel_PNL.Color := $00F1E4E4;
+     Panelup_PNL.Color :=  $00D1A7A7;
+     Button_PNL.Color :=  $00D1A7A7;
+     StaticText1.Font.Color :=clBlack ;
+     StaticText2.Font.Color :=clBlack ;
+     StaticText3.Font.Color :=clBlack ;
+     First_EDT.Color := clWindow;
+     Second_EDT.Color := clWindow;
+     Result_EDT.Color := clWindow;
+  end
+  else
+  begin     //dark
+    Panel_PNL.Color := clBlack  ;
+    Panel_PNL.Color := $00361D1D;
+    Panelup_PNL.Color :=  $00D1A7A7;
+    Button_PNL.Color :=  $00D1A7A7;
+    StaticText1.Font.Color := clScrollBar;
+    StaticText2.Font.Color := clScrollBar;
+    StaticText3.Font.Color := clScrollBar;
+    First_EDT.Color := Clsilver;
+    Second_EDT.Color := Clsilver;
+    Result_EDT.Color := Clsilver;
+  end;
+
+end;
+
+
+
+procedure TForm1.FormClose(Sender: TObject; var Action: TCloseAction);
+
+//begin
+//  if MessageDlg('Welcome to my Delphi application.  Exit now?',
+//    mtConfirmation, [mbYes, mbNo], 0, mbYes) = mrYes then
+//  begin
+//    MessageDlg('Exiting the Delphi application.', mtInformation,
+//      [mbOk], 0, mbOk);
+//    Close;
+//  end;
+
+
+   var
+   CanClose :Boolean;
+begin
+    CanClose := False;
+    if MessageDlg('Are you sure you want to close ?', mtConfirmation, mbYesNo, 0) = mrYes then
+    begin
+        CanClose := True;
+    end
+    else
+    begin
+        CanClose := False;
+        if CanClose = False then
+        begin
+          Exit;
+        end;
+    end;
+end;
+
+///////////////////////////////////////
+
+procedure TForm1.Divide_BTNClick(Sender: TObject);
+var Result :Double;
+begin
+      if  StrtoFloat(Second_EDT.Text) <> 0 then
+      begin
+        Result := StrtoFloat(First_EDT.Text) / StrtoFloat(Second_EDT.Text);
+        Result_EDT.Text := (FloatToStr(Result));
+      end;
+      if  Strtoint(Second_EDT.Text) = 0 then
+      begin
+        ShowMessage('you can not divide number by zero. try again!') ;
+        Result_EDT.Text := '';
+      end;
+end;
+
+
+//////////////////////////////////////
+
+procedure TForm1.Minus_BTNClick(Sender: TObject);
+var Result :TLargeInteger;
+begin
+    Result := StrToUInt64(First_EDT.Text) -  StrToInt64(Second_EDT.Text);
+    Result_EDT.Text := (UIntToStr(Result));
+end;
+
+///////////////////////////////////////////
+
+procedure TForm1.Multiply_BTNClick(Sender: TObject);
+var Result :TLargeInteger;
+begin
+    Result := StrToUInt64(First_EDT.Text) *  StrToInt64(Second_EDT.Text);
+    Result_EDT.Text := (UIntToStr(Result));
+end;
+
+procedure TForm1.Result_EDTChange(Sender: TObject);
+begin
+
+end;
+
+////////////////////////////////////////
+
+procedure TForm1.Sum_BTNClick(Sender: TObject);
+var Result : Integer;
+begin
+  Result := StrToInt(First_EDT.Text) +  StrToInt(Second_EDT.Text);
+  Result_EDT.Text := (IntToStr(Result));
+end;
+
+
+
+
+end.
