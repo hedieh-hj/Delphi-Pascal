@@ -1,0 +1,13 @@
+object DataModule1: TDataModule1
+  Height = 480
+  Width = 640
+  object ADOConnection1: TADOConnection
+    ConnectionString = 
+      'Provider=SQLNCLI11.1;Persist Security Info=False;User ID=sa;Init' +
+      'ial Catalog=School;Data Source=DESKTOP-NIM90OU\ARMOON;Initial Fi' +
+      'le Name="";Server SPN=""'
+    Provider = 'SQLNCLI11.1'
+    Left = 304
+    Top = 224
+  end
+end
