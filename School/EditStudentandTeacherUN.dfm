@@ -90,7 +90,6 @@ object FMEditStudentteacher: TFMEditStudentteacher
     end
   end
   object Editstuteach_QRY: TADOQuery
-    DataSource = FmStudentandTeacher.StudentsandTeacher_DS
     Parameters = <>
     Left = 336
     Top = 216

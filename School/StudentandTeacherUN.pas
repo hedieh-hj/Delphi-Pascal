@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
-  Vcl.StdCtrls, Vcl.ExtCtrls;
+  Vcl.StdCtrls, Vcl.ExtCtrls, System.Actions, Vcl.ActnList, Data.Win.ADODB;
 
 type
   TFmStudentandTeacher = class(TForm)
@@ -20,8 +20,18 @@ type
     Button3: TButton;
     Header_PNL: TPanel;
     DBGrid1: TDBGrid;
+    StuandTeach_QRY: TADOQuery;
+    ActionList1: TActionList;
+    StuandTeach_DS: TDataSource;
+    StuandTeach_QRYIDStudent: TWideStringField;
+    StuandTeach_QRYIDTeacher: TWideStringField;
+    SaveAction: TAction;
+    procedure FormShow(Sender: TObject);
+    procedure SaveActionExecute(Sender: TObject);
   private
     { Private declarations }
+    Procedure SaveFunction(IDStu , IDTeach : Integer);
+    Procedure RunQuery;
   public
     { Public declarations }
   end;
@@ -32,5 +42,37 @@ var
 implementation
 
 {$R *.dfm}
+
+{ TFmStudentandTeacher }
+
+procedure TFmStudentandTeacher.FormShow(Sender: TObject);
+begin
+  RunQuery;
+end;
+
+procedure TFmStudentandTeacher.RunQuery;
+begin
+   with StuandTeach_QRY Do
+   begin
+     SQL.Clear;
+     SQL.Add('select * from StudentTeacher');
+     Open;
+   end;
+end;
+
+procedure TFmStudentandTeacher.SaveActionExecute(Sender: TObject);
+begin
+    SaveFunction(Strtoint(Edit1.Text),Strtoint(Edit2.Text));
+end;
+
+procedure TFmStudentandTeacher.SaveFunction(IDStu, IDTeach: Integer);
+begin
+  with StuandTeach_QRY Do
+  begin
+    insert;
+    FieldByName('IDStudent').AsInteger := IDStu;
+    Fieldbyname('IDTeacher').AsInteger := IDTeach;
+  end;
+end;
 
 end.

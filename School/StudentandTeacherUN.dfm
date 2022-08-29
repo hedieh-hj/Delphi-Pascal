@@ -10,6 +10,7 @@ object FmStudentandTeacher: TFmStudentandTeacher
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  OnShow = FormShow
   TextHeight = 15
   object Main_PNL: TPanel
     Left = 0
@@ -18,10 +19,6 @@ object FmStudentandTeacher: TFmStudentandTeacher
     Height = 525
     Align = alClient
     TabOrder = 0
-    ExplicitLeft = -18
-    ExplicitTop = -11
-    ExplicitWidth = 625
-    ExplicitHeight = 441
     object Create_PNL: TPanel
       Left = 1
       Top = 74
@@ -31,9 +28,6 @@ object FmStudentandTeacher: TFmStudentandTeacher
       Color = 14469065
       ParentBackground = False
       TabOrder = 0
-      ExplicitLeft = 0
-      ExplicitTop = 69
-      ExplicitHeight = 377
       object Label1: TLabel
         Left = 18
         Top = 29
@@ -64,14 +58,14 @@ object FmStudentandTeacher: TFmStudentandTeacher
         Left = 18
         Top = 56
         Width = 151
-        Height = 30
+        Height = 23
         TabOrder = 0
       end
       object Edit2: TEdit
         Left = 18
         Top = 146
         Width = 151
-        Height = 30
+        Height = 23
         TabOrder = 1
       end
       object Button1: TButton
@@ -81,6 +75,7 @@ object FmStudentandTeacher: TFmStudentandTeacher
         Height = 33
         Caption = 'Save'
         TabOrder = 2
+        OnClick = SaveActionExecute
       end
       object Delete_BTN: TButton
         Left = 18
@@ -115,9 +110,6 @@ object FmStudentandTeacher: TFmStudentandTeacher
       ParentBackground = False
       ParentFont = False
       TabOrder = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 625
     end
     object DBGrid1: TDBGrid
       Left = 198
@@ -125,6 +117,7 @@ object FmStudentandTeacher: TFmStudentandTeacher
       Width = 710
       Height = 450
       Align = alClient
+      DataSource = StuandTeach_DS
       TabOrder = 2
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
@@ -134,32 +127,45 @@ object FmStudentandTeacher: TFmStudentandTeacher
       Columns = <
         item
           Expanded = False
-          FieldName = 'TeacherID'
+          FieldName = 'IDStudent'
           Visible = True
         end
         item
           Expanded = False
-          FieldName = 'StudentID'
-          Width = 82
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'Teacher LastName'
-          Width = 119
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'Student LastName'
-          Width = 108
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'Relation ID'
+          FieldName = 'IDTeacher'
           Visible = True
         end>
     end
+  end
+  object StuandTeach_QRY: TADOQuery
+    Connection = DataModule1.ADOConnection1
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'SELECT * FROM STUDENTTEACHER')
+    Left = 560
+    Top = 272
+    object StuandTeach_QRYIDStudent: TWideStringField
+      FieldName = 'IDStudent'
+      Size = 50
+    end
+    object StuandTeach_QRYIDTeacher: TWideStringField
+      FieldName = 'IDTeacher'
+      Size = 50
+    end
+  end
+  object ActionList1: TActionList
+    Left = 464
+    Top = 368
+    object SaveAction: TAction
+      Caption = 'SaveAction'
+      ShortCut = 16467
+      OnExecute = SaveActionExecute
+    end
+  end
+  object StuandTeach_DS: TDataSource
+    DataSet = StuandTeach_QRY
+    Left = 448
+    Top = 272
   end
 end

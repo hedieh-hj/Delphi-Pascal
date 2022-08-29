@@ -33,7 +33,7 @@ implementation
 {$R *.dfm}
 
 
-procedure
+
 
 { TFMEditStudentteacher }
 

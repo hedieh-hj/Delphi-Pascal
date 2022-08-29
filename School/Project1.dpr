@@ -10,7 +10,9 @@ uses
   StudentandClassUN in 'StudentandClassUN.pas' {FmStudentsandClass},
   DMUN in 'Module\DMUN.pas' {DataModule1: TDataModule},
   EditStudentUN in 'EditStudentUN.pas' {FMEditStudent},
-  EditTeacherUN in 'EditTeacherUN.pas' {FMEditTeacher};
+  EditTeacherUN in 'EditTeacherUN.pas' {FMEditTeacher},
+  EditClassUN in 'EditClassUN.pas' {FMEditClass},
+  EditStudentandTeacherUN in 'EditStudentandTeacherUN.pas' {FMEditStudentteacher};
 
 {$R *.res}
 
@@ -26,5 +28,7 @@ begin
   Application.CreateForm(TDataModule1, DataModule1);
   Application.CreateForm(TFMEditStudent, FMEditStudent);
   Application.CreateForm(TFMEditTeacher, FMEditTeacher);
+  Application.CreateForm(TFMEditClass, FMEditClass);
+  Application.CreateForm(TFMEditStudentteacher, FMEditStudentteacher);
   Application.Run;
 end.

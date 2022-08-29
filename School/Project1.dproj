@@ -138,6 +138,14 @@
             <Form>FMEditTeacher</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="EditClassUN.pas">
+            <Form>FMEditClass</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="EditStudentandTeacherUN.pas">
+            <Form>FMEditStudentteacher</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
