@@ -3,7 +3,7 @@ object FmCreateStudent: TFmCreateStudent
   Top = 0
   Caption = 'FmCreateStudent'
   ClientHeight = 470
-  ClientWidth = 740
+  ClientWidth = 902
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,7 +15,7 @@ object FmCreateStudent: TFmCreateStudent
   object Main_PNL: TPanel
     Left = 0
     Top = 0
-    Width = 740
+    Width = 902
     Height = 470
     Align = alClient
     TabOrder = 0
@@ -224,7 +224,7 @@ object FmCreateStudent: TFmCreateStudent
     object Header_PNL: TPanel
       Left = 1
       Top = 1
-      Width = 738
+      Width = 900
       Height = 73
       Align = alTop
       Caption = 'Add Students'
@@ -241,7 +241,7 @@ object FmCreateStudent: TFmCreateStudent
     object DBGrid1: TDBGrid
       Left = 270
       Top = 74
-      Width = 469
+      Width = 631
       Height = 395
       Align = alClient
       DataSource = Student_DS
@@ -307,8 +307,8 @@ object FmCreateStudent: TFmCreateStudent
     Parameters = <>
     SQL.Strings = (
       'Select *  from Students')
-    Left = 360
-    Top = 176
+    Left = 376
+    Top = 272
     object Student_QRYIDStudent: TWideStringField
       FieldName = 'IDStudent'
       Size = 50
@@ -347,8 +347,8 @@ object FmCreateStudent: TFmCreateStudent
     Top = 160
   end
   object ActionList1: TActionList
-    Left = 368
-    Top = 240
+    Left = 392
+    Top = 160
     object SaveAction: TAction
       Caption = 'SaveAction'
       ShortCut = 16467
@@ -363,6 +363,40 @@ object FmCreateStudent: TFmCreateStudent
       Caption = 'DeleteAction'
       ShortCut = 16452
       OnExecute = DeleteActionExecute
+    end
+  end
+  object StudentTeacher_QRY: TADOQuery
+    Connection = DataModule1.ADOConnection1
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'SELECT * FROM STUDENTTEACHER')
+    Left = 480
+    Top = 272
+    object StudentTeacher_QRYIDStudent: TWideStringField
+      FieldName = 'IDStudent'
+      Size = 50
+    end
+    object StudentTeacher_QRYIDTeacher: TWideStringField
+      FieldName = 'IDTeacher'
+      Size = 50
+    end
+  end
+  object Studentclass_QRY: TADOQuery
+    Connection = DataModule1.ADOConnection1
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'SELECT * FROM STUDENTCLASS')
+    Left = 408
+    Top = 344
+    object Studentclass_QRYIDStudent: TWideStringField
+      FieldName = 'IDStudent'
+      Size = 50
+    end
+    object Studentclass_QRYIDClass: TWideStringField
+      FieldName = 'IDClass'
+      Size = 50
     end
   end
 end

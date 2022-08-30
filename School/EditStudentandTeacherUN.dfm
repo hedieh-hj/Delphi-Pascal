@@ -19,9 +19,6 @@ object FMEditStudentteacher: TFMEditStudentteacher
     Height = 270
     Align = alClient
     TabOrder = 0
-    ExplicitTop = -16
-    ExplicitWidth = 423
-    ExplicitHeight = 457
     object Firstname_LBL: TLabel
       Left = 69
       Top = 93
@@ -38,9 +35,9 @@ object FMEditStudentteacher: TFMEditStudentteacher
     object Label1: TLabel
       Left = 69
       Top = 122
-      Width = 61
+      Width = 88
       Height = 23
-      Caption = 'IDClass'
+      Caption = 'IDTeacher'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -19
@@ -54,7 +51,7 @@ object FMEditStudentteacher: TFMEditStudentteacher
       Width = 386
       Height = 48
       Align = alTop
-      Caption = ' Edit Students and Class '
+      Caption = ' Edit Students and Teacher'
       Color = 13084072
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBackground
@@ -64,7 +61,6 @@ object FMEditStudentteacher: TFMEditStudentteacher
       ParentBackground = False
       ParentFont = False
       TabOrder = 0
-      ExplicitWidth = 421
     end
     object IDStudent_EDT: TEdit
       Left = 206
@@ -73,7 +69,7 @@ object FMEditStudentteacher: TFMEditStudentteacher
       Height = 23
       TabOrder = 1
     end
-    object IDClass_EDT: TEdit
+    object IDTeacher_EDT: TEdit
       Left = 206
       Top = 124
       Width = 121
@@ -90,7 +86,10 @@ object FMEditStudentteacher: TFMEditStudentteacher
     end
   end
   object Editstuteach_QRY: TADOQuery
+    Connection = DataModule1.ADOConnection1
     Parameters = <>
+    SQL.Strings = (
+      'select * from studentteacher')
     Left = 336
     Top = 216
   end

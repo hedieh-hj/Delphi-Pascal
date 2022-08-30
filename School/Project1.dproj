@@ -146,6 +146,10 @@
             <Form>FMEditStudentteacher</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="EditStudentandClassUN.pas">
+            <Form>FMEditStudentandClass</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

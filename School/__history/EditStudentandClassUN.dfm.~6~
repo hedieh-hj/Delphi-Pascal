@@ -1,0 +1,93 @@
+object FMEditStudentandClass: TFMEditStudentandClass
+  Left = 0
+  Top = 0
+  Caption = 'FMEditStudentandClass'
+  ClientHeight = 278
+  ClientWidth = 378
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -12
+  Font.Name = 'Segoe UI'
+  Font.Style = []
+  TextHeight = 15
+  object FMEditstudentandClass: TPanel
+    Left = 0
+    Top = 0
+    Width = 378
+    Height = 278
+    Align = alClient
+    TabOrder = 0
+    object Firstname_LBL: TLabel
+      Left = 69
+      Top = 93
+      Width = 86
+      Height = 23
+      Caption = 'IDStudent'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -19
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label1: TLabel
+      Left = 69
+      Top = 122
+      Width = 61
+      Height = 23
+      Caption = 'IDClass'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -19
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Panel2: TPanel
+      Left = 1
+      Top = 1
+      Width = 376
+      Height = 48
+      Align = alTop
+      Caption = ' Edit Students and Class '
+      Color = 13084072
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBackground
+      Font.Height = -27
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentBackground = False
+      ParentFont = False
+      TabOrder = 0
+    end
+    object IDStudent_EDT: TEdit
+      Left = 206
+      Top = 97
+      Width = 121
+      Height = 23
+      TabOrder = 1
+    end
+    object IDClass_EDT: TEdit
+      Left = 206
+      Top = 124
+      Width = 121
+      Height = 23
+      TabOrder = 2
+    end
+    object Register_BTN: TButton
+      Left = 69
+      Top = 187
+      Width = 258
+      Height = 37
+      Caption = 'Save'
+      TabOrder = 3
+    end
+  end
+  object EditStudentandClass_QRY: TADOQuery
+    Connection = DataModule1.ADOConnection1
+    Parameters = <>
+    Left = 32
+    Top = 208
+  end
+end

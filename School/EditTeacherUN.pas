@@ -35,6 +35,7 @@ type
   public
     { Public declarations }
     IDTeacher : integer;
+
   end;
 
 var

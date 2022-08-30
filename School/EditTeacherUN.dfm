@@ -19,9 +19,6 @@ object FMEditTeacher: TFMEditTeacher
     Height = 441
     Align = alClient
     TabOrder = 0
-    ExplicitTop = -16
-    ExplicitWidth = 423
-    ExplicitHeight = 457
     object Firstname_LBL: TLabel
       Left = 69
       Top = 93
@@ -142,7 +139,6 @@ object FMEditTeacher: TFMEditTeacher
       ParentBackground = False
       ParentFont = False
       TabOrder = 0
-      ExplicitWidth = 421
     end
     object Firstname_EDT: TEdit
       Left = 206

@@ -9,7 +9,7 @@ uses
   System.Actions, Vcl.ActnList, Data.Win.ADODB, EditTeacherUN;
 
 type
-  TFmCreateTeacher = class(TForm)
+    TFmCreateTeacher = class(TForm)
     Main_PNL: TPanel;
     Create_PNL: TPanel;
     FName_EDT: TEdit;
@@ -46,10 +46,12 @@ type
     Teacher_QRYEducate: TWideStringField;
     SaveAction: TAction;
     EditAction: TAction;
+    DeleteAction: TAction;
     procedure FormShow(Sender: TObject);
     procedure SaveActionExecute(Sender: TObject);
 
     procedure Button3Click(Sender: TObject);
+    procedure DeleteActionExecute(Sender: TObject);
 
   private
     { Private declarations }
@@ -57,6 +59,8 @@ type
     Procedure  SaveFunction(FName,LName,Tel,Address,NCode,Educate : String;IDTeacher,Age : Integer);
   public
     { Public declarations }
+    checkid:integer;
+    teacherid:integer;
   end;
 
 var
@@ -65,8 +69,6 @@ var
 implementation
 
 {$R *.dfm}
-
-
 
 
 procedure TFmCreateTeacher.Button3Click(Sender: TObject);
@@ -81,6 +83,49 @@ end;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+procedure TFmCreateTeacher.DeleteActionExecute(Sender: TObject);
+var I:integer;
+begin
+
+ //check teacher stu
+ with TADOQuery.Create(nil) do
+    begin
+    Connection := DataModule1.ADOConnection1;
+    sql.Clear;
+    SQL.Add('Select * from Teachers');
+    Open;
+    end;
+    checkid := Teacher_QRY.FieldByName('IDTeacher').AsInteger;
+    with TADOQuery.Create(nil) do
+    begin
+      Connection := DataModule1.ADOConnection1;
+      SQL.Text := 'Select * from StudentTeacher where IDTeacher= ' + IntToStr(checkid);
+      Open;
+       if not IsEmpty then
+        begin
+          ShowMessage('This teacher cannot be deleted because has relation with a student! you have to delete relation first.go to student and teacher form...');
+          Abort;
+        end;
+    end;
+
+    //////no relation
+ I := MessageDlg('Do you want to delete?',mtConfirmation,[mbYes,mbNo],0,mbNo);
+   if I=6 then
+   begin
+     Runquery;
+     teacherid := Teacher_QRY.FieldByName('IDTeacher').AsInteger;
+     with TADOQuery.Create(nil) do
+     begin
+       Connection := DataModule1.ADOConnection1;
+       SQL.Text := 'Delete from Teachers where IDTeacher=' + IntToStr(teacherid);
+       ExecSQL;
+     end;
+     Runquery;
+   end;
+end;
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
 
 procedure TFmCreateTeacher.FormShow(Sender: TObject);
 begin
@@ -123,7 +168,7 @@ with TADOQuery.Create(Nil) DO
     Open;
     if Not (IsEmpty) then
     begin
-      ShowMessage('This ID exist. you cn npot use it again!');
+      ShowMessage('This ID exist. you can not use it again!');
       Abort;
     end;
   end;
