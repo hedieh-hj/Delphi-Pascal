@@ -1,0 +1,147 @@
+unit EditStudentUN;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Data.DB,
+  Data.Win.ADODB, DMUN, System.Actions, Vcl.ActnList;
+
+type
+  TFMEditStudent = class(TForm)
+    Firstname_LBL: TLabel;
+    Label1: TLabel;
+    FMeditstudent: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Panel2: TPanel;
+    Firstname_EDT: TEdit;
+    Lastname_EDT: TEdit;
+    Education_EDT: TEdit;
+    Age_EDT: TEdit;
+    Address_EDT: TEdit;
+    Tell_EDT: TEdit;
+    National_EDT: TEdit;
+    Identify_EDT: TEdit;
+    Save_BTN: TButton;
+    EditStudent_QRY: TADOQuery;
+    ActionList1: TActionList;
+    SaveAction: TAction;
+    procedure FormShow(Sender: TObject);
+    procedure SaveActionExecute(Sender: TObject);
+  private
+    { Private declarations }
+  Procedure OpenQuery;
+  public
+    StudentID : Integer;
+    { Public declarations }
+  end;
+
+var
+  FMEditStudent: TFMEditStudent;
+
+implementation
+
+{$R *.dfm}
+
+{ TFMEditStudent }
+
+procedure TFMEditStudent.FormShow(Sender: TObject);
+begin
+  OpenQuery;
+end;
+
+procedure TFMEditStudent.OpenQuery;
+begin
+  With EditStudent_QRY Do
+  begin
+    SQL.Clear;
+    SQL.Add('Select * from Students where IDStudent = '+IntToStr(StudentID));
+    Open;
+    Firstname_EDT.Text  := FieldByName('FirstName').AsString;
+    Lastname_EDT.Text   := FieldByName('LastName').AsString;
+    Education_EDT.Text  := FieldByName('AVGScore').AsString;
+    Age_EDT.Text        := FieldByName('Age').AsString;
+    Address_EDT.Text    := FieldByName('Address').AsString;
+    National_EDT.Text   := FieldByName('NationalCode').AsString;
+    Identify_EDT.Text   := FieldByName('IdStudent').AsString;
+    Tell_EDT.Text       := FieldByName('Telephone').AsString;
+  end;
+end;
+////////////////////////////////////////////////////////////////////////////////
+
+procedure TFMEditStudent.SaveActionExecute(Sender: TObject);
+
+begin
+
+//   if(Firstname_EDT.Text ='') OR (Lastname_EDT.Text='') or(Education_EDT.Text='')or (Age_EDT.Text='')or
+//    (Address_EDT.Text='') OR (National_EDT.Text='')OR(Tell_EDT.Text='')  THEN
+//    begin
+//    ShowMessage('It is better to fill the empty field');
+
+
+
+
+
+
+
+  with EditStudent_QRY Do
+    begin
+      SQL.Add(Format('Select * from Students where IDStudent = %d',[StudentID]));
+      Open;
+      Edit;
+
+    if (Identify_EDT.Text='') then
+      begin
+        ShowMessage('you have insert an unique identify code!');
+        ABORT;
+      end;
+
+
+
+    //if Id stu has relation with student and teacher table --> check
+     with TADOQuery.Create(nil) Do
+     begin
+      Connection := DataModule1.ADOConnection1;
+      SQL.Add(Format('select * from StudentTeacher where IDStudent= %d',[StudentID])) ;
+      Open;
+       if not IsEmpty and (StudentID <> strtoint(Identify_EDT.Text) )then
+        begin
+          ShowMessage('This ID student cannot be changed. you have to change ID in(student & teacher)form first!');
+          Abort;
+        end;
+     end;
+
+     //if Id stu has relation with student and class table --> check
+     with TADOQuery.Create(nil) Do
+     begin
+      Connection := DataModule1.ADOConnection1;
+      SQL.Add(Format('select * from StudentClass where IDStudent= %d',[StudentID])) ;
+      Open;
+       if not IsEmpty and (StudentID <> strtoint(Identify_EDT.Text) )then
+        begin
+          ShowMessage('This ID student cannot be changed. you have to change ID in(student & class)form first!');
+          Abort;
+        end;
+     end;
+
+      //everything its ok
+      FieldByName('IdStudent').AsString :=Identify_EDT.Text;
+      FieldByName('Firstname').AsString := Firstname_EDT.Text;
+      FieldByName('Lastname').AsString  := Lastname_EDT.Text;
+      FieldByName('AVGScore').AsString  := Education_EDT.Text;
+      FieldByName('Age').AsString       := AGE_EDT.Text;
+      FieldByName('Address').AsString   := Address_EDT.Text;
+      FieldByName('NationalCode').AsString := National_EDT.Text;
+      FieldByName('Telephone').AsString :=Tell_EDT.Text;
+      Post;
+      SQL.Clear;
+      close;
+      ShowMessage('It is Done!');
+    end;
+end;
+
+end.

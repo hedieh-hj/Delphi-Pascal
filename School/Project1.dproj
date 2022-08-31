@@ -150,6 +150,7 @@
             <Form>FMEditStudentandClass</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="Common.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

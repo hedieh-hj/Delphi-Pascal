@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, DMUN,
-  Data.DB, Data.Win.ADODB;
+  Data.DB, Data.Win.ADODB, System.Actions, Vcl.ActnList;
 
 type
   TFMEditTeacher = class(TForm)
@@ -28,7 +28,10 @@ type
     Identify_EDT: TEdit;
     Register_BTN: TButton;
     EditTeacher_QRY: TADOQuery;
+    ActionList1: TActionList;
+    SaveAction: TAction;
     procedure FormShow(Sender: TObject);
+    procedure SaveActionExecute(Sender: TObject);
   private
     { Private declarations }
     procedure OpenQuery;
@@ -68,6 +71,71 @@ begin
     Identify_EDT.Text := FieldByName('IdTeacher').AsString;
     Tell_EDT.Text := FieldByName('Telephone').AsString;
   end;
+end;
+////////////////////////////////////////////////////////////////////////////////
+
+procedure TFMEditTeacher.SaveActionExecute(Sender: TObject);
+var checkid : integer;
+begin
+  //checkid := Strtoint(Identify_EDT.Text);
+  with EditTeacher_QRY Do
+    begin
+
+      SQL.Add(Format('select * from Teachers where IDTeacher =%d',[IDTeacher]));
+      Open;
+      Edit;
+
+
+      //null id
+      if (Identify_EDT.Text = '') then
+      begin
+        ShowMessage('you have to insert an unique ID!');
+        abort;
+      end;
+
+      //If Id teacher has relation with student and teacher table --> check
+      with TADOQuery.Create(nil) Do
+      begin
+          Connection := DataModule1.ADOConnection1;
+          SQL.Add(Format('select * from Studentteacher where IDTeacher =%d',[IDTeacher]));
+          Open;
+
+          if not IsEmpty and (IDTeacher <> Strtoint(Identify_EDT.Text)) then
+           begin
+             ShowMessage('This ID Teacher cannot be changed. you have to change ID in(student & teacher)form first!');
+             Abort;
+           end;
+      end;
+
+      //If ID is using before
+      with TADOQuery.Create(nil) Do
+      begin
+        Connection := DataModule1.ADOConnection1;
+        SQL.Add(Format('select * from teachers where IDTeacher=%d',[Strtoint(Identify_EDT.Text)]));
+        Open;
+
+        if not IsEmpty AND (Strtoint(Identify_EDT.Text)<>IDTeacher) then
+        begin
+          ShowMessage('This ID is using Now! try another ID...');
+          Abort;
+        end;
+      end;
+
+      //everything it is ok
+      FieldByName('Firstname').AsString := Firstname_EDT.Text;
+      FieldByName('lastname').AsString := Lastname_EDT.Text;
+      FieldByName('educate').AsString := Education_EDT.Text;
+      FieldByName('age').Asstring := Age_EDT.Text;
+      fieldbyname('address').AsString := Address_EDT.Text;
+      FieldByName('nationalcode').AsString := National_EDT.Text;
+      FieldByName('telephone').AsString := Tell_EDT.Text;
+      fieldbyname('idteacher').AsString := Identify_EDT.Text;
+      Post;
+      SQL.Clear;
+      Close;
+      ShowMessage('It is Done!');
+
+    end;
 end;
 
 end.

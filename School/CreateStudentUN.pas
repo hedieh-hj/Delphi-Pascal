@@ -173,7 +173,7 @@ begin
   FmEditStudent.StudentID := Student_QRYIDStudent.AsInteger;
   FMEditStudent.ShowModal;
   FreeAndNil(FMEditStudent);
-  //runquery
+  RunQuery;
 end;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////

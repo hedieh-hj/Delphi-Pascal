@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Data.DB,
-  Data.Win.ADODB;
+  Data.Win.ADODB, System.Actions, Vcl.ActnList, DMUN, Common;
 
 type
   TFMEditClass = class(TForm)
@@ -22,12 +22,15 @@ type
     Time_EDT: TEdit;
     Register_BTN: TButton;
     EditClass_QRY: TADOQuery;
+    ActionList1: TActionList;
+    SaveAction: TAction;
     procedure FormShow(Sender: TObject);
+    procedure SaveActionExecute(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
-    ClassID : Integer;
+    ClassID : integer;
   end;
 
 var
@@ -41,14 +44,68 @@ implementation
 
 procedure TFMEditClass.FormShow(Sender: TObject);
 begin
-         with EditClass_QRY do
-         begin
-           SQL.Clear;
-           SQl.Add('select * from Classes where IDClass ='+ InttoStr(ClassID));
-           Open;
-            ClassCode_EDT.Text := FieldByName ('IDClass').AsString;
-            Classname_EDT.Text := FieldByName ('ClassName').AsString;
-         end;
+  with EditClass_QRY do
+    begin
+      SQL.Clear;
+      SQl.Add('select * from Classes where IDClass ='+ inttostr(ClassID));
+      Open;
+      ClassCode_EDT.Text := FieldByName ('IDClass').AsString;
+      Classname_EDT.Text := FieldByName ('ClassName').AsString;
+    end;
+end;
+
+/////////////////////////////////////////////////////////////////////////////////
+
+procedure TFMEditClass.SaveActionExecute(Sender: TObject);
+var check: string;
+begin
+  check :=ClassCode_EDT.Text;
+  with EditClass_QRY Do
+  begin
+    SQL.Add('select * from Classes');
+    Open;
+    Edit;
+
+    // null id check
+    if(ClassCode_EDT.Text='') then
+    begin
+      ShowMessage('you have insert an unique identify code!');
+      Abort;
+    end;
+
+
+     //(FUNCTION IN COMMON.PAS USED FOR VALIDATION )
+    //id is using now
+    if IsValid('Classes','IdClass',strtoint(ClassCode_EDT.Text),(ClassID),tvdtIdIsExist) then //==true
+    begin
+      ShowMessage('This ID is using Now!try another ID.');
+      Abort;
+    end;
+
+//    //for check null
+//    if IsValid('classes','IdClass',strtoint(ClassCode_EDT.Text),classID ,tvdtIdNull) then
+//    begin
+//      ShowMessage('you have insert an unique identify code!');
+//      Abort;
+//    end;
+
+    ///for check relation
+    if (ClassID <> StrToInt(ClassCode_EDT.Text)) and
+        IsValid('studentclass','idclass',classID,classID,tvdtIdInUseForRelation) then
+    begin
+      ShowMessage('This ID class cannot be changed. you have to change ID in(student & class)form first!');
+      Abort;
+    end;
+
+    //everything its ok
+      FieldByName('classname').AsString :=classname_EDT.Text;
+      FieldByName('IDClass').AsString := classcode_EDT.Text;
+      Post;
+      SQL.Clear;
+      close;
+      ShowMessage('It is Done!');
+  end;
+
 end;
 
 end.

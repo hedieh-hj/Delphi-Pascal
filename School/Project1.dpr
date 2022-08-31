@@ -13,7 +13,8 @@ uses
   EditTeacherUN in 'EditTeacherUN.pas' {FMEditTeacher},
   EditClassUN in 'EditClassUN.pas' {FMEditClass},
   EditStudentandTeacherUN in 'EditStudentandTeacherUN.pas' {FMEditStudentteacher},
-  EditStudentandClassUN in 'EditStudentandClassUN.pas' {FMEditStudentandClass};
+  EditStudentandClassUN in 'EditStudentandClassUN.pas' {FMEditStudentandClass},
+  Common in 'Common.pas';
 
 {$R *.res}
 

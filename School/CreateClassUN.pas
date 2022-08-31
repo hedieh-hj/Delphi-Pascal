@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
   Vcl.WinXPickers, Vcl.ComCtrls, Data.DB, Vcl.Grids, Vcl.DBGrids, Data.Win.ADODB,
-  DMUN, System.Actions, Vcl.ActnList;
+  DMUN, System.Actions, Vcl.ActnList, EditClassUN;
 
 type
   TFmCreateClass = class(TForm)
@@ -34,9 +34,11 @@ type
     ActionList1: TActionList;
     SaveAction: TAction;
     DeleteAction: TAction;
+    EditAction: TAction;
     procedure FormShow(Sender: TObject);
     procedure SaveClick(Sender: TObject);
     procedure DeleteActionExecute(Sender: TObject);
+    procedure EditActionExecute(Sender: TObject);
   private
     { Private declarations }
     Procedure RunQuery;
@@ -108,6 +110,15 @@ begin
      end;
      Runquery;
    end;
+end;
+/////////////////////////////////////////////////////////////////////////////////////////////////
+procedure TFmCreateClass.EditActionExecute(Sender: TObject);
+begin
+    FmEditClass:= TFmEditClass.create(nil);
+    FmEditClass .ClassID := Class_QRYIDClass.asinteger;
+    FmEditClass.ShowModal;
+    FreeAndNil(FmEditClass);
+    RunQuery;
 end;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////

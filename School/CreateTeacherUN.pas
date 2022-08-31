@@ -77,7 +77,7 @@ begin
   FMEditTeacher.IDTeacher := Teacher_QRYIDTeacher.AsInteger;
   FMEditTeacher.ShowModal;
   FreeAndNil(FMEditTeacher);
-  //runquery
+  RunQuery;
 end;
 
 
