@@ -92,7 +92,7 @@ begin
     //if id is null
     if (Identify_EDT.Text='') then
     begin
-      ShowMessage('you have insert an unique identify code!');
+      ShowMessage('This ID field can not be empty.you have to insert an unique ID!');
       ABORT;
     end;
 

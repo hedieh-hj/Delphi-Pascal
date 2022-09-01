@@ -3,7 +3,7 @@ object FmCreateStudent: TFmCreateStudent
   Top = 0
   Caption = 'FmCreateStudent'
   ClientHeight = 470
-  ClientWidth = 902
+  ClientWidth = 761
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,10 +15,11 @@ object FmCreateStudent: TFmCreateStudent
   object Main_PNL: TPanel
     Left = 0
     Top = 0
-    Width = 902
+    Width = 761
     Height = 470
     Align = alClient
     TabOrder = 0
+    ExplicitWidth = 902
     object Create_PNL: TPanel
       Left = 1
       Top = 74
@@ -154,28 +155,52 @@ object FmCreateStudent: TFmCreateStudent
         TabOrder = 2
       end
       object Button1: TButton
-        Left = 26
-        Top = 281
-        Width = 96
+        AlignWithMargins = True
+        Left = 11
+        Top = 280
+        Width = 247
         Height = 33
+        Margins.Left = 10
+        Margins.Right = 10
         Action = SaveAction
+        Align = alBottom
+        Caption = 'Save'
         TabOrder = 3
+        ExplicitLeft = 1
+        ExplicitTop = 295
+        ExplicitWidth = 267
       end
       object Delete_BTN: TButton
-        Left = 148
-        Top = 320
-        Width = 101
+        AlignWithMargins = True
+        Left = 11
+        Top = 358
+        Width = 247
         Height = 33
+        Margins.Left = 10
+        Margins.Right = 10
         Action = DeleteAction
+        Align = alBottom
+        Caption = 'Delete'
         TabOrder = 4
+        ExplicitLeft = 76
+        ExplicitTop = 344
+        ExplicitWidth = 101
       end
       object Button3: TButton
-        Left = 148
-        Top = 281
-        Width = 99
+        AlignWithMargins = True
+        Left = 11
+        Top = 319
+        Width = 247
         Height = 33
+        Margins.Left = 10
+        Margins.Right = 10
         Action = EditAction
+        Align = alBottom
+        Caption = 'Edit'
         TabOrder = 5
+        ExplicitLeft = 2
+        ExplicitTop = 331
+        ExplicitWidth = 267
       end
       object AVG_EDT: TEdit
         Left = 118
@@ -212,19 +237,11 @@ object FmCreateStudent: TFmCreateStudent
         Height = 23
         TabOrder = 10
       end
-      object Button2: TButton
-        Left = 26
-        Top = 320
-        Width = 96
-        Height = 33
-        Caption = 'Search'
-        TabOrder = 11
-      end
     end
     object Header_PNL: TPanel
       Left = 1
       Top = 1
-      Width = 900
+      Width = 759
       Height = 73
       Align = alTop
       Caption = 'Add Students'
@@ -237,11 +254,12 @@ object FmCreateStudent: TFmCreateStudent
       ParentBackground = False
       ParentFont = False
       TabOrder = 1
+      ExplicitWidth = 900
     end
     object DBGrid1: TDBGrid
       Left = 270
       Top = 74
-      Width = 631
+      Width = 490
       Height = 395
       Align = alClient
       DataSource = Student_DS
@@ -299,6 +317,118 @@ object FmCreateStudent: TFmCreateStudent
           FieldName = 'Address'
           Visible = True
         end>
+    end
+    object Panel1: TPanel
+      Left = 270
+      Top = 74
+      Width = 490
+      Height = 395
+      Align = alClient
+      Caption = 'Panel1'
+      TabOrder = 3
+      ExplicitLeft = 271
+      ExplicitTop = 75
+      ExplicitWidth = 631
+      object DBGrid2: TDBGrid
+        Left = 1
+        Top = 44
+        Width = 488
+        Height = 350
+        Align = alClient
+        DataSource = Student_DS
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -12
+        TitleFont.Name = 'Segoe UI'
+        TitleFont.Style = []
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'IDStudent'
+            Width = 76
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'FirstName'
+            Width = 76
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'LastName'
+            Width = 75
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'NationalCode'
+            Width = 104
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Age'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Telephone'
+            Width = 66
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Address'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'AvgScore'
+            Width = 58
+            Visible = True
+          end>
+      end
+      object Panel2: TPanel
+        Left = 1
+        Top = 1
+        Width = 488
+        Height = 43
+        Align = alTop
+        Color = 14469065
+        ParentBackground = False
+        TabOrder = 1
+        ExplicitWidth = 629
+        object Label9: TLabel
+          Left = 24
+          Top = 5
+          Width = 66
+          Height = 25
+          Caption = 'Search :'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -19
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          ParentFont = False
+        end
+        object Search_EDT: TEdit
+          Left = 103
+          Top = 5
+          Width = 242
+          Height = 32
+          AutoSize = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 0
+          OnChange = Search_EDTChange
+        end
+      end
     end
   end
   object Student_QRY: TADOQuery
@@ -371,7 +501,7 @@ object FmCreateStudent: TFmCreateStudent
     Parameters = <>
     SQL.Strings = (
       'SELECT * FROM STUDENTTEACHER')
-    Left = 480
+    Left = 728
     Top = 272
     object StudentTeacher_QRYIDStudent: TWideStringField
       FieldName = 'IDStudent'
@@ -388,8 +518,8 @@ object FmCreateStudent: TFmCreateStudent
     Parameters = <>
     SQL.Strings = (
       'SELECT * FROM STUDENTCLASS')
-    Left = 408
-    Top = 344
+    Left = 728
+    Top = 336
     object Studentclass_QRYIDStudent: TWideStringField
       FieldName = 'IDStudent'
       Size = 50

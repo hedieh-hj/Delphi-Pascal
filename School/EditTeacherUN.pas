@@ -89,7 +89,7 @@ begin
       //null id
       if (Identify_EDT.Text = '') then
       begin
-        ShowMessage('you have to insert an unique ID!');
+        ShowMessage('This ID field can not be empty.you have to insert an unique ID!');
         abort;
       end;
 

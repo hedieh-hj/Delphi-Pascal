@@ -35,7 +35,7 @@ type
     procedure DeleteActionExecute(Sender: TObject);
   private
     { Private declarations }
-    Procedure SaveFunction(IDStu , IDTeach : Integer);
+    Procedure SaveFunction(IDStud , IDTeache : Integer);
     Procedure RunQuery;
   public
     { Public declarations }
@@ -76,6 +76,7 @@ begin
   FMEditStudentteacher.IDTeach := StuandTeach_QRYIDTeacher.AsInteger;
   FMEditStudentteacher.ShowModal;
   FreeAndNil(FMEditStudentteacher);
+  RunQuery;
 end;
 /////////////////////////////////////////////////////////////////////////////////////////////////
 procedure TFmStudentandTeacher.FormShow(Sender: TObject);
@@ -98,13 +99,14 @@ begin
     SaveFunction(Strtoint(Edit1.Text),Strtoint(Edit2.Text));
 end;
 /////////////////////////////////////////////////////////////////////////////////////////////////
-procedure TFmStudentandTeacher.SaveFunction(IDStu, IDTeach: Integer);
+procedure TFmStudentandTeacher.SaveFunction(IDStud, IDTeache: Integer);
 begin
   with StuandTeach_QRY Do
   begin
     insert;
-    FieldByName('IDStudent').AsInteger := IDStu;
-    Fieldbyname('IDTeacher').AsInteger := IDTeach;
+    FieldByName('IDStudent').AsInteger := IDStud;
+    Fieldbyname('IDTeacher').AsInteger := IDTeache;
+    POST;
   end;
 end;
 

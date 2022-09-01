@@ -31,7 +31,6 @@ type
     TEL_EDT: TEdit;
     Address_EDT: TEdit;
     NCode_EDT: TEdit;
-    Button2: TButton;
     Header_PNL: TPanel;
     DBGrid1: TDBGrid;
     Student_QRY: TADOQuery;
@@ -54,10 +53,16 @@ type
     StudentTeacher_QRYIDTeacher: TWideStringField;
     Studentclass_QRYIDStudent: TWideStringField;
     Studentclass_QRYIDClass: TWideStringField;
+    Panel1: TPanel;
+    DBGrid2: TDBGrid;
+    Panel2: TPanel;
+    Label9: TLabel;
+    Search_EDT: TEdit;
     procedure FormShow(Sender: TObject);
     procedure SaveActionExecute(Sender: TObject);
     procedure EditActionExecute(Sender: TObject);
     procedure DeleteActionExecute(Sender: TObject);
+    procedure Search_EDTChange(Sender: TObject);
 
 
 
@@ -190,7 +195,8 @@ begin
     With Student_QRY Do
     begin
       SQL.Clear;
-      SQL.Add('Select * from Students');
+      SQL.Add('Select IDStudent + '' '' + FirstName + '' '' + LastName + '' '' + NationalCode + '' '' + Telephone As FilterName');
+      SQL.Add(',* from Students');
       Open;
     end;
 end;
@@ -241,5 +247,17 @@ end;
 
 
 
+
+procedure TFmCreateStudent.Search_EDTChange(Sender: TObject);
+begin
+  if Search_EDT.Text <> '' then
+  Begin
+    student_QRY.Filtered := False;
+    student_QRY.Filter := ' FilterName like ' + QuotedStr('*'+ StringReplace(Search_EDT.Text,' ','*',[rfReplaceAll])  + '*');
+    student_QRY.Filtered := true;
+  End
+  else
+    student_QRY.Filtered := False;
+end;
 
 end.

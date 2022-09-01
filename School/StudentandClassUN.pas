@@ -118,6 +118,7 @@ begin
     INSERT;
     fieldbyname('IDStudent').AsInteger := IDStudent ;
     fieldbyname('IDClass').AsInteger := IDClass;
+    POST;
   end;
 end;
 

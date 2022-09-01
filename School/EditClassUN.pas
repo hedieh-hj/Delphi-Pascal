@@ -69,33 +69,28 @@ begin
     // null id check
     if(ClassCode_EDT.Text='') then
     begin
-      ShowMessage('you have insert an unique identify code!');
+      ShowMessage('This ID field can not be empty.you have to insert an unique ID!');
       Abort;
     end;
 
 
      //(FUNCTION IN COMMON.PAS USED FOR VALIDATION )
     //id is using now
-    if IsValid('Classes','IdClass',strtoint(ClassCode_EDT.Text),(ClassID),tvdtIdIsExist) then //==true
+    if IsValid('Classes','IdClass','null',strtoint(ClassCode_EDT.Text),(ClassID),tvdtIdIsExist) then //==true
     begin
       ShowMessage('This ID is using Now!try another ID.');
       Abort;
     end;
 
-//    //for check null
-//    if IsValid('classes','IdClass',strtoint(ClassCode_EDT.Text),classID ,tvdtIdNull) then
-//    begin
-//      ShowMessage('you have insert an unique identify code!');
-//      Abort;
-//    end;
 
     ///for check relation
     if (ClassID <> StrToInt(ClassCode_EDT.Text)) and
-        IsValid('studentclass','idclass',classID,classID,tvdtIdInUseForRelation) then
+        IsValid('studentclass','idclass','null',classID,classID,tvdtIdInUseForRelation) then
     begin
       ShowMessage('This ID class cannot be changed. you have to change ID in(student & class)form first!');
       Abort;
     end;
+
 
     //everything its ok
       FieldByName('classname').AsString :=classname_EDT.Text;

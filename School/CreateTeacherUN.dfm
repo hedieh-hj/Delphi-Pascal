@@ -2,8 +2,8 @@ object FmCreateTeacher: TFmCreateTeacher
   Left = 0
   Top = 0
   Caption = 'FmCreateTeacher'
-  ClientHeight = 486
-  ClientWidth = 769
+  ClientHeight = 478
+  ClientWidth = 813
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,20 +15,22 @@ object FmCreateTeacher: TFmCreateTeacher
   object Main_PNL: TPanel
     Left = 0
     Top = 0
-    Width = 769
-    Height = 486
+    Width = 813
+    Height = 478
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 952
+    ExplicitWidth = 769
+    ExplicitHeight = 486
     object Create_PNL: TPanel
       Left = 1
       Top = 74
       Width = 269
-      Height = 411
+      Height = 403
       Align = alLeft
       Color = 14469065
       ParentBackground = False
       TabOrder = 0
+      ExplicitHeight = 411
       object Label1: TLabel
         Left = 18
         Top = 29
@@ -155,30 +157,52 @@ object FmCreateTeacher: TFmCreateTeacher
         TabOrder = 2
       end
       object Button1: TButton
-        Left = 26
-        Top = 289
-        Width = 96
+        AlignWithMargins = True
+        Left = 11
+        Top = 288
+        Width = 247
         Height = 33
+        Margins.Left = 10
+        Margins.Right = 10
         Action = SaveAction
+        Align = alBottom
+        Caption = 'Save'
         TabOrder = 3
+        ExplicitLeft = 26
+        ExplicitTop = 289
+        ExplicitWidth = 96
       end
       object Delete_BTN: TButton
-        Left = 148
-        Top = 328
-        Width = 101
+        AlignWithMargins = True
+        Left = 11
+        Top = 366
+        Width = 247
         Height = 33
+        Margins.Left = 10
+        Margins.Right = 10
+        Align = alBottom
         Caption = 'Delete'
         TabOrder = 4
         OnClick = DeleteActionExecute
+        ExplicitLeft = 148
+        ExplicitTop = 328
+        ExplicitWidth = 101
       end
       object TButton
-        Left = 148
-        Top = 289
-        Width = 99
+        AlignWithMargins = True
+        Left = 11
+        Top = 327
+        Width = 247
         Height = 33
+        Margins.Left = 10
+        Margins.Right = 10
+        Align = alBottom
         Caption = 'Edit'
         TabOrder = 5
         OnClick = Button3Click
+        ExplicitLeft = 148
+        ExplicitTop = 289
+        ExplicitWidth = 99
       end
       object Educate_EDT: TEdit
         Left = 118
@@ -215,19 +239,11 @@ object FmCreateTeacher: TFmCreateTeacher
         Height = 23
         TabOrder = 10
       end
-      object Button2: TButton
-        Left = 26
-        Top = 328
-        Width = 96
-        Height = 33
-        Caption = 'Search'
-        TabOrder = 11
-      end
     end
     object Header_PNL: TPanel
       Left = 1
       Top = 1
-      Width = 767
+      Width = 811
       Height = 73
       Align = alTop
       Caption = 'Add Teacher'
@@ -240,68 +256,120 @@ object FmCreateTeacher: TFmCreateTeacher
       ParentBackground = False
       ParentFont = False
       TabOrder = 1
-      ExplicitWidth = 950
+      ExplicitWidth = 767
     end
-    object DBGrid1: TDBGrid
+    object Panel1: TPanel
       Left = 270
       Top = 74
-      Width = 498
-      Height = 411
+      Width = 542
+      Height = 403
       Align = alClient
-      DataSource = Teacher_DS
+      Caption = 'Panel1'
       TabOrder = 2
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -12
-      TitleFont.Name = 'Segoe UI'
-      TitleFont.Style = []
-      Columns = <
-        item
-          Expanded = False
-          FieldName = 'IDTeacher'
-          Width = 81
-          Visible = True
+      ExplicitLeft = 296
+      ExplicitTop = 224
+      ExplicitWidth = 185
+      ExplicitHeight = 41
+      object DBGrid1: TDBGrid
+        Left = 1
+        Top = 44
+        Width = 540
+        Height = 358
+        Align = alClient
+        DataSource = Teacher_DS
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -12
+        TitleFont.Name = 'Segoe UI'
+        TitleFont.Style = []
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'IDTeacher'
+            Width = 81
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'FirstName'
+            Width = 75
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'LastName'
+            Width = 83
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'NationalCode'
+            Width = 105
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Age'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Telephone'
+            Width = 417
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Address'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Educate'
+            Width = 87
+            Visible = True
+          end>
+      end
+      object Panel2: TPanel
+        Left = 1
+        Top = 1
+        Width = 540
+        Height = 43
+        Align = alTop
+        Color = 14469065
+        ParentBackground = False
+        TabOrder = 1
+        ExplicitWidth = 496
+        object Label9: TLabel
+          Left = 24
+          Top = 5
+          Width = 73
+          Height = 25
+          Caption = 'Search :'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -19
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          ParentFont = False
         end
-        item
-          Expanded = False
-          FieldName = 'FirstName'
-          Width = 75
-          Visible = True
+        object Search_EDT: TEdit
+          Left = 103
+          Top = 5
+          Width = 242
+          Height = 32
+          AutoSize = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 0
+          OnChange = Search_EDTChange
         end
-        item
-          Expanded = False
-          FieldName = 'LastName'
-          Width = 83
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'NationalCode'
-          Width = 105
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'Age'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'Telephone'
-          Width = 417
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'Address'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'Educate'
-          Width = 87
-          Visible = True
-        end>
+      end
     end
   end
   object Teacher_QRY: TADOQuery

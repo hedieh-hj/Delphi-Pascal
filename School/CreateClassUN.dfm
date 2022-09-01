@@ -137,30 +137,48 @@ object FmCreateClass: TFmCreateClass
         TimeFormat = 'h:nn AMPM'
       end
       object Save: TButton
-        Left = 26
-        Top = 350
-        Width = 191
+        AlignWithMargins = True
+        Left = 11
+        Top = 373
+        Width = 219
         Height = 36
+        Margins.Left = 10
+        Margins.Right = 10
         Action = SaveAction
+        Align = alBottom
         TabOrder = 5
+        ExplicitLeft = 9
+        ExplicitTop = 371
       end
       object Delete_BTN: TButton
-        Left = 26
-        Top = 435
-        Width = 191
+        AlignWithMargins = True
+        Left = 11
+        Top = 458
+        Width = 219
         Height = 37
+        Margins.Left = 10
+        Margins.Right = 10
+        Align = alBottom
         Caption = 'Delete'
         TabOrder = 6
         OnClick = DeleteActionExecute
+        ExplicitLeft = 8
+        ExplicitWidth = 233
       end
       object Button3: TButton
-        Left = 26
-        Top = 392
-        Width = 191
+        AlignWithMargins = True
+        Left = 11
+        Top = 415
+        Width = 219
         Height = 37
+        Margins.Left = 10
+        Margins.Right = 10
+        Align = alBottom
         Caption = 'Edit'
         TabOrder = 7
         OnClick = EditActionExecute
+        ExplicitLeft = 9
+        ExplicitTop = 413
       end
     end
     object Header_PNL: TPanel

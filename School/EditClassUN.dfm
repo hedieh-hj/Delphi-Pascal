@@ -150,12 +150,12 @@ object FMEditClass: TFMEditClass
   object EditClass_QRY: TADOQuery
     Connection = DataModule1.ADOConnection1
     Parameters = <>
-    Left = 344
-    Top = 288
+    Left = 32
+    Top = 296
   end
   object ActionList1: TActionList
-    Left = 184
-    Top = 184
+    Left = 32
+    Top = 232
     object SaveAction: TAction
       Caption = 'SaveAction'
       ShortCut = 16467

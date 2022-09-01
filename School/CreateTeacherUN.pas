@@ -32,7 +32,6 @@ type
     Label6: TLabel;
     Label7: TLabel;
     Label8: TLabel;
-    Button2: TButton;
     Teacher_QRY: TADOQuery;
     Teacher_DS: TDataSource;
     ActionList1: TActionList;
@@ -47,11 +46,17 @@ type
     SaveAction: TAction;
     EditAction: TAction;
     DeleteAction: TAction;
+    Search_EDT: TEdit;
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Label9: TLabel;
     procedure FormShow(Sender: TObject);
     procedure SaveActionExecute(Sender: TObject);
 
     procedure Button3Click(Sender: TObject);
     procedure DeleteActionExecute(Sender: TObject);
+    procedure Search_EDTChange(Sender: TObject);
+
 
   private
     { Private declarations }
@@ -140,7 +145,8 @@ begin
   With Teacher_QRY Do
     begin
       SQL.Clear;
-      SQL.Add('Select * from Teachers');
+      SQL.Add('Select IDTeacher + '' '' + FirstName + '' '' + LastName + '' '' + NationalCode + '' '' + Telephone As FilterName');
+      SQL.Add(',* from Teachers');
       Open;
     end;
 end;
@@ -159,12 +165,13 @@ end;
 procedure TFmCreateTeacher.SaveFunction(FName, LName, Tel, Address, NCode,
   Educate: String; IDTeacher, Age: Integer);
 begin
+
 with TADOQuery.Create(Nil) DO
   begin
     Connection := DataModule1.ADOConnection1;
     SQL.Clear;
-    SQL.Add('Select * from Students');
-    SQL.Add('where IDTeacher = '+IntToStr(IDTeacher));
+    SQL.Add('Select * from teachers');
+    SQL.Add('where IDTeacher = '+ IntToStr(IDTeacher));
     Open;
     if Not (IsEmpty) then
     begin
@@ -187,6 +194,18 @@ With Teacher_QRY Do
     FieldByName('Age').AsInteger := Age;
     Post;
   end;
+end;
+
+procedure TFmCreateTeacher.Search_EDTChange(Sender: TObject);
+begin
+  if Search_EDT.Text <> '' then
+  Begin
+    Teacher_QRY.Filtered := False;
+    Teacher_QRY.Filter := ' FilterName like ' + QuotedStr('*'+ StringReplace(Search_EDT.Text,' ','*',[rfReplaceAll])  + '*');
+    Teacher_QRY.Filtered := true;
+  End
+  else
+    Teacher_QRY.Filtered := False;
 end;
 
 end.
